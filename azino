@@ -1,0 +1,73 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        int money = 5000, money2 = 5000, st1,st2;
+        Random r = new Random();
+        Scanner s = new Scanner(System.in);
+        System.out.println("Имя первого игрока: ");
+        String name = s.next();
+        System.out.println("Имя второго игрока: ");
+        String name2 = s.next();
+        System.out.println("1,3,5,7,9,11-черные. 2,4,6,8,10,12-красные. 0-зеро");
+        while(true){
+            System.out.println(name + "Выберите и введите на что ставите, введите ставку. На Вашем счету =" + money);
+            int n= s.nextInt();
+            while(true){
+                st1 = s.nextInt();
+                if(st1 > 0 & st1 < money)
+                    break;
+                else
+                    System.out.println("Ставка не коректна. Повторите попытку");
+            }
+        }
+        while(true){
+            System.out.println(name2 + "Выберите и введите на что ставите, введите ставку. На Вашем счету =" + money2);
+            int n1= s.nextInt();
+            while(true){
+                st2 = s.nextInt();
+                if(st2 > 0 & st2 < money)
+                    break;
+                else
+                    System.out.println("Ставка не коректна. Повторите попытку");
+            }
+        }
+        while(true){
+            if(st1<st2){
+                System.out.println(name +", Повысьте ставку");
+                st1= s.nextInt();
+            }
+            if (st1 > st2) {
+                System.out.println(name2 + ", Повысьте ставку");
+                st2 = s.nextInt();
+            }
+            if(st1==st2){
+                break;
+            }
+            int rr= r.nextInt(12);
+            if(st1==rr & st2==rr){
+                money = money + st1*2;
+                money2 = money2 + st2*2;
+            }
+            else if(st1!=rr & st2==rr){
+                money = money - st1;
+                money2 = money2 + st2*2;
+            }
+            else if(st1==rr & st2!=rr) {
+                money = money + st1 * 2;
+                money2 = money2 - st2;
+            }
+            else{
+                money = money - st1;
+                money2 = money2 - st2;
+            }
+            if(money<0&&money2>0){
+                System.out.println(name2 +", Вы победили, на счету="+ st2);
+            }
+            else if(money>0&&money2<0){
+                System.out.println(name +", Вы победили, на счету="+ st1);
+            }
+        }
+    }
+}
